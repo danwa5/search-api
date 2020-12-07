@@ -4,14 +4,14 @@ RSpec.describe AddSearchTerm do
   describe '#call' do
     context 'when search term is blank' do
       it 'returns nil' do
-        res = described_class.new(term: nil).call
+        res = described_class.call(term: nil)
         expect(res).to be_nil
       end
     end
 
     context 'when search term is new for the current block time' do
       it 'creates a SearchTerm and increments count' do
-        described_class.new(term: 'steak').call
+        described_class.call(term: 'steak')
 
         st = SearchTerm.last
 
@@ -36,7 +36,7 @@ RSpec.describe AddSearchTerm do
 
       it 'increments count of existing SearchTerm' do
         expect {
-          described_class.new(term: @term).call
+          described_class.call(term: @term)
         }.not_to change(SearchTerm, :count)
 
         st = SearchTerm.last

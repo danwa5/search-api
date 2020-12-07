@@ -1,4 +1,6 @@
 class Subscribe::MessagePollingService
+  include Services::BaseService
+
   def call
     messages = sqs_client.receive_message(queue_url: queue_url, max_number_of_messages: 10).messages
 

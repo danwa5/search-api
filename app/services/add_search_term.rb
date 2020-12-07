@@ -1,4 +1,6 @@
 class AddSearchTerm
+  include Services::BaseService
+
   def initialize(term: term)
     @term = String(term).downcase
   end

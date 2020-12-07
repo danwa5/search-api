@@ -1,4 +1,6 @@
 class Publish::MessagePublishingService
+  include Services::BaseService
+
   def initialize(search_term: search_term)
     @search_term = search_term
   end
@@ -17,8 +19,8 @@ class Publish::MessagePublishingService
     sns = Aws::SNS::Client.new(credentials)
 
     sns.publish(
-      topic_arn:  ENV['AWS_SNS_TOPIC_ARN'],
-      message:    { search_term: @search_term }.to_json
+      topic_arn: ENV['AWS_SNS_TOPIC_ARN'],
+      message:   { search_term: @search_term }.to_json
     )
   end
 
