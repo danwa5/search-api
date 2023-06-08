@@ -4,9 +4,9 @@ RSpec.describe 'Search', type: :request do
   describe 'POST /api/v1/search' do
     context 'when request returns success' do
       example do
-        expect_any_instance_of(AddSearchTerm).to receive(:call).and_return(true)
+        expect(AddSearchTerm).to receive(:call).with(term: 'bbq').and_return(true)
 
-        post api_v1_search_path
+        post api_v1_search_path, params: 'q=bbq'
 
         expect(response).to have_http_status(200)
       end
@@ -14,9 +14,9 @@ RSpec.describe 'Search', type: :request do
 
     context 'when request returns failure' do
       example do
-        expect_any_instance_of(AddSearchTerm).to receive(:call).and_raise
+        expect(AddSearchTerm).to receive(:call).and_raise
 
-        post api_v1_search_path
+        post api_v1_search_path, params: 'q=bbq'
 
         expect(response).to have_http_status(400)
       end

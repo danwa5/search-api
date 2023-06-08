@@ -6,10 +6,8 @@ class Subscribe::MessagePollingService
 
     messages.each do |msg|
       body = JSON.parse(msg.body)
-      h = eval(body['Message'])
-      term = h.fetch(:search_term, nil)
-
-      res = AddSearchTerm.new(term: term).call
+      m = JSON.parse(body['Message'])
+      res = AddSearchTerm.call(term: m['search_term'])
       delete_message(msg.receipt_handle) if res
     end
   end

@@ -2,7 +2,7 @@ default: &default
   adapter: postgresql
   host: localhost
   username: dlee
-  password:
+  password: 123456
   pool: 5
   timeout: 5000
   encoding: utf8
